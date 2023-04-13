@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "pycodeless"
+version = "0.1.0"
+description = "Build Python code using natural language as a universal interface"
+authors = ["hacksparr0w <hacksparr0w@protonmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+openai = "^0.27.4"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
