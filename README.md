@@ -12,11 +12,10 @@ generation.
 ## Features
 
  - [x] The `@codeless` decorator allows you to define your functions using
- natural language.
- - [x] All generated code is stored and can be edited or commited to your
- version control. 
- - [ ] Support for different models to allow for customization and offline
- usage.
+ natural language. All generated code is stored and can be edited or commited
+ to your version control system.
+ - [ ] Support for different language models to allow for better customization
+ and offline usage.
  - [ ] Custom docstring formatting to allow for referencing objects across the
  whole codebase.
 
