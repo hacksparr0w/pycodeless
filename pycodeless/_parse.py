@@ -170,6 +170,6 @@ def parse_module(module_source: str) -> Module:
         line_index += 1
 
     if not isinstance(state, _ModuleSeekingState):
-        raise RuntimeError
+        raise RuntimeError("Unexpected parser state")
 
     return Module(module_source, docstring, functions)

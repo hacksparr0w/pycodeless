@@ -1,13 +1,13 @@
 [tool.poetry]
 name = "pycodeless"
-version = "0.2.0"
+version = "0.2.2"
 description = "Build Python code using natural language as a universal interface"
 authors = ["hacksparr0w <hacksparr0w@protonmail.com>"]
 license = "MIT"
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = "^3.9"
 openai = "^0.27.4"
 
 
