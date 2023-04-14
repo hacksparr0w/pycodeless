@@ -12,7 +12,7 @@ generation.
 ## Features
 
  - [x] The `@codeless` decorator allows you to define your functions using
- natural language. All generated code is stored and can be edited or commited
+ natural language. All generated code is stored and can be edited or committed
  to your version control system.
  - [ ] Support for different language models to allow for better customization
  and offline usage.
@@ -38,8 +38,8 @@ from pycodeless import codeless
 # You can either specify your OpenAI API key in this way, or you can use the
 # environment variable OPENAI_API_KEY.
 # The same goes for specifying the model name, where the relevant environment
-# variable is OPENAI_MODEL_NAME. If no model name is specified, codeless will
-# default to "gpt-3.5-turbo".
+# variable is OPENAI_MODEL_NAME. If no model name is specified, Pycodeless
+# will default to "gpt-3.5-turbo".
 
 codeless.openai_api_key = "sk-fEaz..."
 codeless.openai_model_name = "gpt-4"
@@ -60,7 +60,7 @@ def spongebob_case(text: str) -> str:
 
 
 def main():
-    print(spongebob_case(greet("Bob")))
+    print(spongebob_case(greet("Patrick")))
 
 
 if __name__ == "__main__":
@@ -73,18 +73,20 @@ if __name__ == "__main__":
  - **How is this different from GitHub Copilot?**
  Pycodeless has indeed very similar functionality to GitHub Copilot, but
  the goal of this project is very different. Firstly, Copilot autocompletes
- your code inplace and does not differ from the generated part of the code and
- the original prompt. One of the main points of this project is to shift the
- development focus on the prompt itself and make natural language a universal
- interface for code generation, while moving the generated code into
- background. The development experience is really different and I encourage
- you to test this out yourself. Another important point is that Pycodeless
- makes code generation from natural language into a first-class citizen. The
- code generation happens in runtime, which means we can use the whole Python
- infrastructure to enhance the prompt specification process (think dynamic
- docstrings with custom tags to aid the LLMs, browsing through the dependency
- graph of type annotations to provide additional context, etc.). Also, I like
- the idea of not being dependent on any particular language model.
+ your code in place and does not differentiate between the generated part of
+ the code and the original prompt. One of the main points of this project is
+ to completely shift the development focus onto the prompt itself and make
+ natural language a universal interface for code generation while moving the
+ generated code into the background. The development experience is really
+ distinct, and I encourage you to test this out for yourself. Another
+ important point is that Pycodeless makes code generation from natural
+ language a first-class Python citizen. The code generation happens in runtime,
+ which means we can leverage the whole Python infrastructure to enhance the
+ prompt specification process (think dynamic docstrings with custom tags to 
+ reference various objects from the codebase and aid the LLMs, walking through
+ the dependency graphs of type annotations to provide additional context, etc.).
+ Also, I like the idea of not being dependent on any particular language model
+ or text editor.
 
 ## Limitations
 
