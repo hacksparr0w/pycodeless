@@ -70,8 +70,8 @@ if __name__ == "__main__":
 
 ## FAQ
 
- - Q: How is this different than GitHub Copilot?
- A: Pycodeless has indeed very similar functionality to GitHub Copilot, but
+ - **How is this different than GitHub Copilot?**
+ Pycodeless has indeed very similar functionality to GitHub Copilot, but
  the goal of this project is very different. Firstly, Copilot autocompletes
  your code inplace and does not differ from the generated part of the code and
  the original prompt. One of the main points of this project is to shift the
