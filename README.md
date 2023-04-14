@@ -1,4 +1,4 @@
-# pycodeless
+# Pycodeless
 
 > **Warning**
 > This project is in a very early stage of development and may not always
@@ -22,7 +22,7 @@ generation.
 
 ## Installation
 
-You can install pycodeless using pip:
+You can install Pycodeless using pip:
 
 ```
 pip install pycodeless
@@ -33,7 +33,7 @@ Since Pycodeless currently only works with the OpenAI API, you'll also need an
 
 ## Usage
 
-Following is a sample code using pycodeless.
+Following is a sample code using Pycodeless.
 
 ```python
 from pycodeless import codeless
