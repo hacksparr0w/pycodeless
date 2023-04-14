@@ -5,6 +5,17 @@ description = "Build Python code using natural language as a universal interface
 authors = ["hacksparr0w <hacksparr0w@protonmail.com>"]
 license = "MIT"
 readme = "README.md"
+homepage = "https://github.com/hacksparr0w/pycodeless"
+repository = "https://github.com/hacksparr0w/pycodeless"
+documentation = "https://github.com/hacksparr0w/pycodeless"
+keywords = [
+    "natural",
+    "language",
+    "codegen",
+    "programming",
+    "llm",
+    "codeless"
+]
 
 [tool.poetry.dependencies]
 python = "^3.9"

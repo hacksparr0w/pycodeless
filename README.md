@@ -11,9 +11,10 @@ generation.
 
 ## Features
 
- - [x] The `@codeless` decorator allows you to define your functions using
- natural language. All generated code is stored and can be edited or committed
- to your version control system.
+ - [x] The `@codeless` decorator generates your function code from their type
+ annotations and docstrings. All generated code is cached in a local
+ `__pycodeless__` package and can be edited or committed to your version
+ control system.
  - [ ] Support for different language models to allow for better customization
  and offline usage.
  - [ ] Custom docstring formatting to allow for referencing objects across the
@@ -26,6 +27,9 @@ You can install pycodeless using pip:
 ```
 pip install pycodeless
 ```
+
+Since Pycodeless currently only works with the OpenAI API, you'll also need an
+[OpenAI API key][openai-api-keys].
 
 ## Usage
 
@@ -108,3 +112,5 @@ if __name__ == "__main__":
 
 If you'd like to report a bug or have an idea for a cool feature, issues and
 pull requests are highly appreciated.
+
+[openai-api-keys]: https://platform.openai.com/account/api-keys
