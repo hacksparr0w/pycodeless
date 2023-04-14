@@ -37,7 +37,7 @@ from pycodeless import codeless
 
 
 codeless.openai_api_key = (
-    "Paste your OpenAI API key here or set the 'OPENAI_API_KEY' environment
+    "Paste your OpenAI API key here or set the 'OPENAI_API_KEY' environment"
     "variable!"
 )
 
