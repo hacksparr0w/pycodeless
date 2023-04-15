@@ -27,9 +27,11 @@ def _generate_function_source(llm: LanguageModel, template: str) -> str:
             "You are a large language model tasked with completing Python"
             " functions given their template with an optional docstring. "
             "When writing code, make sure to follow these rules:\n"
-            " 1. Respond only with a valid Python code including the original"
-            " function definition and imports. Do NOT add any additional "
-            "commentary. Do NOT wrap the code in quotes or backticks.\n"
+            " 1. Respond with a valid Python code including ONLY the original"
+            " function definition and imports. Do NOT include any classes or "
+            "other definitions.\n"
+            " 2. Do NOT add any additional commentary in the response! Do NOT "
+            "wrap the code in quotes or backticks!\n"
             " 2. Always remove the @codeless decorator from the function "
             "definition. It must not be present in our output!\n"
             " 3. Preserve the original function definition in your output \n"
@@ -42,6 +44,13 @@ def _generate_function_source(llm: LanguageModel, template: str) -> str:
             f"{template}"
         )
     )
+
+    #
+    # TODO: The LLMs usually include the user definitions in the response even
+    # thogght they are explicitely asked no to. We should probably also use
+    # the custom parser here to exctract only imports and the completed
+    # function.
+    #
 
     result = llm.prompt(messages).content
 
@@ -91,10 +100,15 @@ def _generate_module_source(
 
     source = source.strip()
 
-    if not source:
-        source = f"{docstring}\n{generated_function_source}"
-    else:
-        source = f"{docstring}\n{source}\n\n\n{generated_function_source}"
+    #
+    # This is kinda hacky and could be made way better if we had a proper
+    # import parser.
+    #
+
+    if not "from __stub__ import *" in source:
+        source = f"from __stub__ import *\n\n{source}"
+
+    source = f"{docstring}\n{source}\n\n\n{generated_function_source}"
 
     return source
 
@@ -143,7 +157,7 @@ def generate(
             current_template_function_checksum and
         function_name in generated_module_parsed.functions
     ):
-        return generated_module_path, generated_module_name
+        return template_module, generated_module_path, generated_module_name
 
     generation_metadata[function_name] = current_template_function_checksum
     generated_function_source = _generate_function_source(
@@ -160,4 +174,4 @@ def generate(
 
     generated_module_path.write_text(generated_module_source, "utf-8")
 
-    return generated_module_path, generated_module_name
+    return template_module, generated_module_path, generated_module_name
