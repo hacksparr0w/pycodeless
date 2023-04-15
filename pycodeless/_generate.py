@@ -5,7 +5,7 @@ import platform
 import re
 
 from pathlib import Path
-from typing import Callable
+from typing import Callable, Dict, Tuple
 
 from ._llm import LanguageModel, Message
 from ._parse import Module, parse_module
@@ -66,14 +66,14 @@ def _generate_function_source(llm: LanguageModel, template: str) -> str:
     return result
 
 
-def _decode_module_generation_metadata(module: Module) -> dict[str, str]:
+def _decode_module_generation_metadata(module: Module) -> Dict[str, str]:
     if not module.docstring:
         return {}
 
     return json.loads(module.docstring.content)
 
 
-def _encode_module_generation_metadata(data: dict[str, str]) -> str:
+def _encode_module_generation_metadata(data: Dict[str, str]) -> str:
     contents = json.dumps(data, indent=4)
     docstring = f'"""\n{contents}\n"""\n'
 
@@ -81,7 +81,7 @@ def _encode_module_generation_metadata(data: dict[str, str]) -> str:
 
 
 def _generate_module_source(
-        metadata: dict,
+        metadata: Dict,
         previous_module: Module,
         generated_function_name: str,
         generated_function_source: str
@@ -135,7 +135,7 @@ def _generate_module_path(path: Path) -> Path:
 def generate(
         llm: LanguageModel,
         template_function: Callable
-) -> tuple[Path, str]:
+) -> Tuple[Path, str]:
     function_name = template_function.__name__
 
     template_module = inspect.getmodule(template_function)
