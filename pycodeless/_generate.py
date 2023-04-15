@@ -26,7 +26,7 @@ def _generate_function_source(llm: LanguageModel, template: str) -> str:
     template = re.sub("^@codeless\n", "", template, flags=re.M)
 
     messages = (
-        Message.system(
+        Message.user(
             "You are a large language model tasked with completing Python"
             " functions given their template with an optional docstring. "
             "When writing code, make sure to follow these rules:\n"
@@ -37,12 +37,10 @@ def _generate_function_source(llm: LanguageModel, template: str) -> str:
             " 2. Preserve the original function definition in your output "
             "including the original docstring.\n"
             " 3. Make sure the code is compatible with Python version "
-            f"{platform.python_version()}."
-        ),
-        Message.user(
+            f"{platform.python_version()}.\n\n"
             "The following is the function to be completed:\n\n"
             f"{template}"
-        )
+        ),
     )
 
     #
