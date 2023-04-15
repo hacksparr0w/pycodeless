@@ -46,7 +46,7 @@ from pycodeless import codeless
 # will default to "gpt-3.5-turbo".
 
 codeless.openai_api_key = "sk-fEaz..."
-codeless.openai_model_name = "gpt-4"
+codeless.openai_model_name = "gpt-3.5-turbo"
 
 
 @codeless
