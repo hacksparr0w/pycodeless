@@ -72,6 +72,30 @@ if __name__ == "__main__":
 
 ```
 
+## Limitations
+
+At this point, Pycodeless works *reasonably* well with native Python type
+hints or type annotations from popular third-party libraries that the LLMs
+are familiar with and know how to import. Unless you are able to come up with
+a very elaborate docstring prompt, custom type annotations will not work. More
+exploration work is needed to figure out how to make this work in all cases.
+
+Following is an non-exhaustive list of known limitations:
+
+ - The current code generation and parsing features might be buggy, as there's
+ currently no mechanism for telling whether an output from an LLM is actually
+ runnable Python code.
+ - The `@codeless` decorator may not work in all contexts (REPL, classes,
+ methods, etc.).
+ - There's currently no dependency management in place. This means that we
+ can't track changes across the whole codebase and regenerate functions when
+ their dependencies change. This also means that we can't remove any generated
+ imports when removing a generated function inside a generated module, because
+ there's no way of telling whether or not the import in question is used by
+ any other function. Another problem with this is that if there's a custom
+ type annotation in the function definition, we have no way of referencing it
+ in the generated module.
+
 ## FAQ
 
  - **How is this different from GitHub Copilot?**
@@ -91,22 +115,6 @@ if __name__ == "__main__":
  the dependency graphs of type annotations to provide additional context, etc.).
  Also, I like the idea of not being dependent on any particular language model
  or text editor.
-
-## Limitations
-
- - The current code generation and parsing features might be buggy, as there's
- currently no mechanism for telling whether an output from an LLM is actually
- runnable Python code.
- - The `@codeless` decorator may not work in all contexts (REPL, classes,
- methods, etc.).
- - There's currently no dependency management in place. This means that we
- can't track changes across the whole codebase and regenerate functions when
- their dependencies change. This also means that we can't remove any generated
- imports when removing a generated function inside a generated module, because
- there's no way of telling whether or not the import in question is used by
- any other function. Another problem with this is that if there's a custom
- type annotation in the function definition, we have no way of referencing it
- in the generated module.
 
 ## Contribution
 
