@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pycodeless"
-version = "0.2.2"
+version = "0.2.3"
 description = "Build Python code using natural language as a universal interface"
 authors = ["hacksparr0w <hacksparr0w@protonmail.com>"]
 license = "MIT"

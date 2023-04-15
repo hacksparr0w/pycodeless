@@ -52,7 +52,7 @@ codeless.openai_model_name = "gpt-4"
 @codeless
 def greet(name: str) -> str:
     """
-    Make greeting for a person with the given name
+    Make greeting for a person with the given name in pirate language
     """
 
 

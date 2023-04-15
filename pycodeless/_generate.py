@@ -2,6 +2,7 @@ import hashlib
 import inspect
 import json
 import platform
+import re
 
 from pathlib import Path
 from typing import Callable
@@ -22,6 +23,8 @@ def _checksum(text: str) -> str:
 
 
 def _generate_function_source(llm: LanguageModel, template: str) -> str:
+    template = re.sub("^@codeless\n", "", template, flags=re.M)
+
     messages = (
         Message.system(
             "You are a large language model tasked with completing Python"
@@ -29,14 +32,11 @@ def _generate_function_source(llm: LanguageModel, template: str) -> str:
             "When writing code, make sure to follow these rules:\n"
             " 1. Respond with a valid Python code including ONLY the original"
             " function definition and imports. Do NOT include any classes or "
-            "other definitions.\n"
-            " 2. Do NOT add any additional commentary in the response! Do NOT "
-            "wrap the code in quotes or backticks!\n"
-            " 2. Always remove the @codeless decorator from the function "
-            "definition. It must not be present in our output!\n"
-            " 3. Preserve the original function definition in your output \n"
-            "including the original docstring."
-            " 4. Make sure the code is compatible with Python version "
+            "other definitions. Do NOT add any additional commentary in the "
+            "response! Do NOT wrap the code in quotes or backticks!\n"
+            " 2. Preserve the original function definition in your output "
+            "including the original docstring.\n"
+            " 3. Make sure the code is compatible with Python version "
             f"{platform.python_version()}."
         ),
         Message.user(
@@ -53,6 +53,15 @@ def _generate_function_source(llm: LanguageModel, template: str) -> str:
     #
 
     result = llm.prompt(messages).content
+
+    if result.startswith("```python"):
+        result = result[9:]
+
+    if result.startswith("```"):
+        result = result[3:]
+
+    if result.endswith("```"):
+        result = result[:-3]
 
     return result
 
