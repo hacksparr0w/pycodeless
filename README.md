@@ -15,6 +15,8 @@ generation.
  annotations and docstrings. All generated code is cached in a local
  `__pycodeless__` package and can be edited or committed to your version
  control system.
+ - [x] LLM-assisted debugger that tells you why your code failed uppon
+ encountering an unhandled exception.
  - [ ] Support for different language models to allow for better customization
  and offline usage.
  - [ ] Custom docstring formatting to allow for referencing objects across the
@@ -70,6 +72,33 @@ def main():
 if __name__ == "__main__":
     main()
 
+```
+
+You can enable the LLM-assisted debugger like in the following example.
+
+```python
+from pycodeless import config, install_debugger
+
+
+config.openai_api_key = "sk-fEaz..."
+
+install_debugger()
+
+
+class Test:
+    def __init__(self):
+        pass
+
+    def go(self):
+        print(self.asdf)
+
+
+def main():
+    print(Test().go())
+
+
+if __name__ == "__main__":
+    main()
 ```
 
 ## Limitations
