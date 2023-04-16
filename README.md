@@ -36,7 +36,7 @@ Since Pycodeless currently only works with the OpenAI API, you'll also need an
 Following is a sample code using Pycodeless.
 
 ```python
-from pycodeless import codeless
+from pycodeless import config, codeless
 
 
 # You can either specify your OpenAI API key in this way, or you can use the
@@ -45,8 +45,8 @@ from pycodeless import codeless
 # variable is OPENAI_MODEL_NAME. If no model name is specified, Pycodeless
 # will default to "gpt-3.5-turbo".
 
-codeless.openai_api_key = "sk-fEaz..."
-codeless.openai_model_name = "gpt-3.5-turbo"
+config.openai_api_key = "sk-fEaz..."
+config.openai_model_name = "gpt-3.5-turbo"
 
 
 @codeless
