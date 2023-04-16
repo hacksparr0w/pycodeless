@@ -1,19 +1,20 @@
-import os
+import sys
 
-from typing import Callable, Optional
+from typing import Callable
 
+from ._config import config
+from ._debug import handle_exception
 from ._generate import generate
 from ._load import load_module
 from ._openai_llm import OpenAiLanguageModel
 
 
 def codeless(function: Callable) -> Callable:
-    if not codeless.openai_api_key:
-        raise RuntimeError("OpenAI API key was not set")
+    config._load()
 
     llm = OpenAiLanguageModel(
-        codeless.openai_api_key,
-        codeless.openai_model_name
+        config.openai_api_key,
+        config.openai_model_name
     )
 
     result = generate(llm, function)
@@ -27,8 +28,15 @@ def codeless(function: Callable) -> Callable:
     return wrapper
 
 
-codeless.openai_api_key: Optional[str] = os.getenv("OPENAI_API_KEY")
-codeless.openai_model_name: str = os.getenv(
-    "OPENAI_MODEL_NAME",
-    "gpt-3.5-turbo"
-)
+def install_debugger():
+    config._load()
+
+    llm = OpenAiLanguageModel(
+        config.openai_api_key,
+        config.openai_model_name
+    )
+
+    def hook(*args, **kwargs):
+        handle_exception(llm, *args, **kwargs)
+
+    sys.excepthook = hook

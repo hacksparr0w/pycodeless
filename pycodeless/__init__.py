@@ -1,5 +1,7 @@
-from ._api import codeless
+from ._api import config, codeless, install_debugger
 
 __all__ = [
-    "codeless"
+    "config",
+    "codeless",
+    "install_debugger"
 ]
